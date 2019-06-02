@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+{% block content %}
+    <br><br>
+    <h2 style="text-align: center">Alunos cadastrados</h2>
+    <br><br>
+    <table class="table table-striped">
+        <thead class="thead-dark">
+            <tr>
+                <th>Nome</th>
+                <th>Matrícula</th>
+                <th>Idade</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for alunos in alunos %}
+            <tr>
+                <td>{{ alunos.nome }}</td>
+                <td>{{ alunos.matricula }}</td>
+                <td>{{ alunos.idade }}</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

@@ -4,8 +4,12 @@ from wtforms.ext.appengine.db import model_form
 from app.models.forms import FormAluno
 from app.models.tables import Aluno
 
-@app.route("/", methods=["GET", "POST"])
+@app.route("/")
 def index():
+    return render_template('index.html')
+
+@app.route("/cadastro", methods=["GET", "POST"])
+def cadastro_aluno():
     form = FormAluno()
     if form.validate_on_submit():
         a = Aluno(form.nome.data, form.matricula.data, form.idade.data)
@@ -14,7 +18,14 @@ def index():
         return "Aluno adicionado com sucesso"
     else:
         print(form.errors)
-    return render_template('index.html', form=form)
+    return render_template('cadastro.html', form=form)
+
+@app.route("/dashboard")
+def dashboard():
+    r = Aluno.query.all()
+    return render_template('dashboard.html', alunos=r)
+
+
 
 @app.route("/teste")
 def teste():
