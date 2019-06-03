@@ -1,25 +1,22 @@
 {% extends 'base.html' %}
 {% block content %}
     <div class="col-md-6 offset-md-3">
-            <h4 class="font-weight-bold text-uppercase mt-3 mb-4">Cadastrar um novo aluno</h4>
+        <h4 class="font-weight-bold text-uppercase mt-3 mb-4">Editar aluno</h4>
         <form action="" method="POST">
             {{ form.csrf_token }}
             <div class="form-group">
                 <label>Nome</label>
-                {{ form.nome(class="form-control",
-                placeholder="(string)") }}
+                {{ form.nome(class="form-control") }}
             </div>
             <div class="form-group">
                 <label>Matrícula</label>
-                {{ form.matricula(class="form-control",
-                placeholder="(int UNIQUE)") }}
+                {{ form.matricula(class="form-control") }}
             </div>
             <div class="form-group">
                 <label>Idade</label>
-                {{ form.idade(class="form-control",
-                placeholder="(int)") }}
+                {{ form.idade(class="form-control") }}
             </div>
-            <button type="submit" class="btn btn-success">Cadastrar</button>
+            <button type="submit" class="btn btn-success">Salvar</button>
         </form>
     </div>
 {% endblock %}

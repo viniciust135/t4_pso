@@ -1,7 +1,9 @@
 {% extends 'base.html' %}
 {% block content %}
-    <br><br>
-    <h2 style="text-align: center">Alunos cadastrados</h2>
+<div class="col-md-6 offset-md-3">
+    <h4 class="font-weight-bold text-uppercase mt-3 mb-4">Cadastro de Alunos</h4>
+    <h2 class="font-weight-bold text-uppercase mt-3 mb-4">Dashboard</h2>
+    <a class="btn btn-success" href="/cadastro">Cadastrar um novo aluno</a>
     <br><br>
     <table class="table table-striped">
         <thead class="thead-dark">
@@ -9,6 +11,8 @@
                 <th>Nome</th>
                 <th>Matrícula</th>
                 <th>Idade</th>
+                <th></th>
+                <th></th>
             </tr>
         </thead>
         <tbody>
@@ -17,8 +21,33 @@
                 <td>{{ alunos.nome }}</td>
                 <td>{{ alunos.matricula }}</td>
                 <td>{{ alunos.idade }}</td>
+                <td>
+                    <a href="editar_aluno/{{alunos.id}}" class="btn btn-primary btn-sm float-right">Editar aluno</a>
+                </td>
+                <td>
+                    <form action="{{url_for('remover_aluno', id=alunos.id)}}" method="post">
+                        <input type="hidden" name="_method" value="DELETE">
+                        <input type="submit" value="Remover" class="btn btn-danger btn-sm">
+                    </form>               
+                </td>
             </tr>
         {% endfor %}
         </tbody>
     </table>
+    {% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+        {% for category, message in messages %}
+        <div class="alert alert-{{ category }}">{{ message }}</div>
+        {% endfor %}
+    {% endif %}
+    {% endwith %}
+    
+    {% if error %}
+    <div class="alert alert-danger">{{error}}</div>
+    {% endif %}
+    
+    {% if msg %}
+    <div class="alert alert-success">{{msg}}</div>
+    {% endif %}
+</div>
 {% endblock %}
